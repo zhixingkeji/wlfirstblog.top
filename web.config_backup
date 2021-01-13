@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <location path="." allowOverride="false" inheritInChildApplications="false">
+    <system.webServer>
+      <rewrite>
+        <rules configSource="web_config\rewrite.config"/>
+      </rewrite>
+      <defaultDocument configSource="web_config\default.config"/>
+      <httpErrors configSource="web_config\httpErrors.config"/>
+      <handlers configSource="web_config\php.config"/>
+    </system.webServer>
+  </location>
+  <system.webServer>
+    <rewrite>
+      <rules>
+			<rule name="WordPress: http://81.70.90.234" patternSyntax="Wildcard">
+				<match url="*"/>
+					<conditions>
+						<add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true"/>
+						<add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true"/>
+					</conditions>
+				<action type="Rewrite" url="index.php"/>
+			</rule></rules>
+    </rewrite>
+  </system.webServer>
+</configuration>
